@@ -1,25 +1,20 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import DictionaryQueryPicker from "./components/dictionary/dictionary-query-picker";
+import {MobxRootStore, StoreProvider} from "./store/mobx-root-store";
+import Dictionary from "./components/dictionary/dictionary";
+import DictionaryLetterInput from "./components/dictionary/dictionary-letter-input";
+import QueryResult from "./components/dictionary/query-result";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    return (
+        <StoreProvider value={MobxRootStore}>
+            <div className="App">
+                <Dictionary />
+                <DictionaryQueryPicker />
+                <DictionaryLetterInput />
+                <QueryResult />
+            </div>
+        </StoreProvider>
   );
 }
 
