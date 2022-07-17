@@ -23,10 +23,8 @@ export const DictionaryStore = types
         get queryResult() {
             if(store.query && store.letter){
                 const regexFn = getQueryRegex(store.query as EQuery);
-                // console.log(regexFn)
 
                 return store.dictionary.match(regexFn(store.letter))?.length ?? 0;
-                // return  0;
             } else {
                 return 0
             }
