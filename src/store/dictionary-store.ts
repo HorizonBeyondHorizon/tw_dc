@@ -13,20 +13,24 @@ export const DictionaryStore = types
             store.query = query;
         };
 
+        const setDictionary = (text: string) => {
+            store.dictionary = text;
+        }
+
         const setLetter = (letter: string) => {
             store.letter = letter;
         };
 
-        return { setQuery, setLetter };
+        return { setQuery, setDictionary, setLetter };
     })
     .views((store) => ({
-        get queryResult() {
+        get queryResult(): [number, string[]] {
             if(store.query && store.letter){
                 const regexFn = getQueryRegex(store.query as EQuery);
-
-                return store.dictionary.match(regexFn(store.letter))?.length ?? 0;
+                const matches = store.dictionary.match(regexFn(store.letter));
+                return [matches?.length ?? 0, matches ?? []];
             } else {
-                return 0
+                return [0, []]
             }
         }
     }));
